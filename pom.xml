@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<heroku-maven-plugin.version>3.0.3</heroku-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -42,6 +43,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>${heroku-maven-plugin.version}</version>
+				<configuration>
+					<appName>my-heroku-docker-hello-world</appName>
+					<processTypes>
+						<web>java -jar -Dserver.port=$PORT target/${project.build.finalName}.jar</web>
+					</processTypes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
